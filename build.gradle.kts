@@ -27,16 +27,6 @@ allprojects {
     group = "dev.jombi"
     version = "0.0.1-SNAPSHOT"
 
-    dependencyManagement {
-        dependencies {
-            dependencySet("io.jsonwebtoken:0.12.6") {
-                entry("jjwt-api")
-                entry("jjwt-impl")
-                entry("jjwt-jackson")
-            }
-        }
-    }
-
     repositories {
         mavenCentral()
     }

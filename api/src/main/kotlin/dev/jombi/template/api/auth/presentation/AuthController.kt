@@ -29,10 +29,4 @@ class AuthController(
         val userId = authService.createNewMember(request.name, request.credential, request.password)
         return ResponseData.ok(data = userId)
     }
-
-    @PostMapping("/refresh")
-    fun refreshAccessToken(@RequestBody @Valid request: NewTokenRequestDto): ResponseEntity<ResponseData<TokenResponseDto>> {
-        val dto = authService.getNewToken(request.refreshToken)
-        return ResponseData.ok(data = TokenResponseDto(dto.accessToken, dto.refreshToken))
-    }
 }
