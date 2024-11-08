@@ -3,7 +3,7 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
 plugins {
     kotlin("jvm") version "1.9.24"
 
-    id("org.springframework.boot") version "3.3.1"
+    id("org.springframework.boot") version "3.4.0-RC1" // TODO: Bump version to 3.4.0 (stable) when it releases.
     id("io.spring.dependency-management") version "1.1.5"
 
     kotlin("plugin.jpa") version "1.9.24"
@@ -29,6 +29,7 @@ allprojects {
 
     repositories {
         mavenCentral()
+        maven("https://repo.spring.io/milestone")
     }
 
     tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
