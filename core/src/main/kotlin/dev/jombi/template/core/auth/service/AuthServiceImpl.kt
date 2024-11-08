@@ -1,6 +1,5 @@
 package dev.jombi.template.core.auth.service
 
-import dev.jombi.template.business.auth.dto.TokenDto
 import dev.jombi.template.business.auth.service.AuthService
 import dev.jombi.template.common.exception.CustomException
 import dev.jombi.template.core.auth.exception.AuthExceptionDetails
@@ -18,7 +17,7 @@ class AuthServiceImpl(
     private val authenticationManager: AuthenticationManager,
     private val passwordEncoder: PasswordEncoder,
 ) : AuthService {
-    override fun authenticate(credential: String, password: String): TokenDto {
+    override fun authenticate(credential: String, password: String) {
         val token = UsernamePasswordAuthenticationToken(credential, password)
 
         val auth = authenticationManager.authenticate(token)
@@ -27,11 +26,16 @@ class AuthServiceImpl(
         TODO()
     }
 
-    override fun createNewMember(name: String, credential: String, password: String): Long {
+    override fun createNewMember(name: String, credential: String, password: String) {
         if (memberRepository.existsByCredential(credential))
             throw CustomException(AuthExceptionDetails.USER_ALREADY_EXISTS, credential)
 
-        return memberRepository.save(Member(credential, passwordEncoder.encode(password), name))
-            .id.id
+        memberRepository.save(
+            Member(
+                name = name,
+                credential = credential,
+                password = passwordEncoder.encode(password),
+            )
+        )
     }
 }
